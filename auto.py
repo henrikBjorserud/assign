@@ -1,32 +1,25 @@
 from random import shuffle
 from time import sleep
+from collections import deque
+import json
 
 
-def true_shuffle(some_list):
-    randomized_list = some_list[:]
-    while True:
-        random.shuffle(randomized_list)
-        for a, b in zip(some_list, randomized_list):
-            if a == b:
-                break
-            else:
-                return randomized_list
+def assignment(slots, workers):
+    
+    workers = [i.capitalize() for i in workers]
+    shuffle(workers)
+    FM = dict(zip(slots, workers))
+    
 
-
-def jenny_check(FM, EM):
-
-    f = FM.get("JK")
-    e = EM.get("JK")
-    print(f, e)
-    if f == "Jenny":
-        return True
-    elif e == "Jenny":
-        return True
-    else:
-        return False
+    dequed_workers = deque(workers)
+    dequed_workers.rotate(1)
+    EM = dict(zip(slots, list(dequed_workers)))
+    
+    return FM, EM
 
 
 def worker_names(num_workers):
+    
     names = []
     for i in range(num_workers):
         print("-" * 14)
@@ -34,7 +27,7 @@ def worker_names(num_workers):
         names.append(name)
         print("-" * 14)
         print(f"Tillagda namn: {', ' .join(names)}")
-    sleep(2)
+
     return names
 
 
@@ -43,50 +36,34 @@ def four_workers():
     workers = worker_names(4)
     FM, EM = assignment(slots, workers)
 
-    print(FM, EM)
+    return FM, EM
 
 
 def three_workers():
     slots = {"JK", "MB, AB, AG", "KU, GL, FB"}
     workers = worker_names(3)
     FM, EM = assignment(slots, workers)
-    print(FM, EM)
-
-
-def assignment(slots, workers):
-
-    workers = [i.capitalize() for i in workers]
-
-    shuffle(workers)
-    FM = dict(zip(slots, workers))
-
-    shuffled_workers = true_shuffle(workers)
-
-    EM = dict(zip(slots, shuffled_workers))
-
-    if jenny_check(FM, EM) == True:
-        assignment(slots, workers)
-
-    else:
-        return FM, EM
+    return FM, EM
 
 
 def menu():
-    print("Hur många personal jobbar på Verkstan idag?\n")
+    print("Hur många personal vill du fördela?\n")
 
-    num_workers = input("Ange en siffra mellan tre och fyra:")
+    num_workers = input("Ange 3 eller 4:")
 
     if num_workers == "3":
-        three_workers()
+        FM, EM = three_workers()
 
     elif num_workers == "4":
-        four_workers()
+        FM, EM = four_workers()
 
     else:
         print("Försök igen")
         sleep(3)
         menu()
-
+    
+    print(json.dumps(FM, indent=4))
+    print(json.dumps(EM, indent=4))
 
 def main():
 
