@@ -4,22 +4,40 @@ from collections import deque
 import json
 
 
+def jenny_check(shift):
+    if (len(shift)) == 3:
+        que_number = -1
+    else:
+        que_number = 1
+
+    if shift.get("JK") == "Jenny":
+        dequed_values = deque(shift.values())
+        dequed_values.rotate(que_number)
+        return dict(zip(shift.keys(), dequed_values))
+    else:
+        return shift
+
+
 def assignment(slots, workers):
-    
+
     workers = [i.capitalize() for i in workers]
     shuffle(workers)
     FM = dict(zip(slots, workers))
-    
+
+    FM = jenny_check(FM)
 
     dequed_workers = deque(workers)
     dequed_workers.rotate(1)
+
     EM = dict(zip(slots, list(dequed_workers)))
-    
+
+    EM = jenny_check(EM)
+
     return FM, EM
 
 
 def worker_names(num_workers):
-    
+
     names = []
     for i in range(num_workers):
         print("-" * 14)
@@ -61,13 +79,15 @@ def menu():
         print("Försök igen")
         sleep(3)
         menu()
-    
+
     print(json.dumps(FM, indent=4))
     print(json.dumps(EM, indent=4))
+
 
 def main():
 
     menu()
+    sleep(200)
 
 
 if __name__ == "__main__":
