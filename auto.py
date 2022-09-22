@@ -4,24 +4,44 @@ from collections import deque
 import json
 
 
-"""This script assigns workers to shifts"""
+def jenny_check(shift):
+    """Check value of JK and rotate accordingly"""
+
+    if (len(shift)) == 3:
+        que_number = -1
+    else:
+        que_number = 1
+
+    if shift.get("JK") == "Jenny":
+        dequed_values = deque(shift.values())
+        dequed_values.rotate(que_number)
+        return dict(zip(shift.keys(), dequed_values))
+    else:
+        return shift
 
 
-def assignment(shifts, workers):
-    """Assign personel to shifts"""
+def assignment(slots, workers):
+    """This script assigns workers to shifts"""
+
     workers = [i.capitalize() for i in workers]
     shuffle(workers)
-    FM = dict(zip(shifts, workers))
+    FM = dict(zip(slots, workers))
+
+    FM = jenny_check(FM)
 
     dequed_workers = deque(workers)
     dequed_workers.rotate(1)
-    EM = dict(zip(shifts, list(dequed_workers)))
+
+    EM = dict(zip(slots, list(dequed_workers)))
+
+    EM = jenny_check(EM)
 
     return FM, EM
 
 
 def worker_names(num_workers):
     """Ask for names of personel"""
+
     names = []
     for i in range(num_workers):
         print("-" * 14)
@@ -78,6 +98,8 @@ def main():
 
     print(json.dumps(FM, indent=4))
     print(json.dumps(EM, indent=4))
+    menu()
+    sleep(200)
 
 
 if __name__ == "__main__":
