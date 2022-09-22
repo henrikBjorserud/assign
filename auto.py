@@ -3,6 +3,11 @@ from time import sleep
 from collections import deque
 import json
 
+def export(FM, EM):
+
+    whole_day = {"FM": FM, "EM": EM}
+    with open('dagens.txt', 'w') as out_file:
+        json.dump(whole_day, out_file, indent = 4, ensure_ascii = False)
 
 def jenny_check(shift):
     if (len(shift)) == 3:
@@ -41,7 +46,7 @@ def worker_names(num_workers):
     names = []
     for i in range(num_workers):
         print("-" * 14)
-        name = input("Skriv ett namn och tryck enter:")
+        name = input("Skriv ett namn och tryck enter: ")
         names.append(name)
         print("-" * 14)
         print(f"Tillagda namn: {', ' .join(names)}")
@@ -67,7 +72,7 @@ def three_workers():
 def menu():
     print("Hur många personal vill du fördela?\n")
 
-    num_workers = input("Ange 3 eller 4:")
+    num_workers = input("Ange 3 eller 4: ")
 
     if num_workers == "3":
         FM, EM = three_workers()
@@ -79,10 +84,20 @@ def menu():
         print("Försök igen")
         sleep(3)
         menu()
-
+    print("-" * 14)
+    print("Morgonen:")
     print(json.dumps(FM, indent=4))
+    print("-" * 14)
+    print("Eftermiddagen:")
     print(json.dumps(EM, indent=4))
-
+    
+    to_print = input("Om du vill skriva schemat till en fil, skriv EXPORT: ")
+    
+    if to_print == "EXPORT":
+        export(FM, EM)
+    else: 
+        print("Avslutar...")
+        sleep(3)
 
 def main():
 
