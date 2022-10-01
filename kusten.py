@@ -27,73 +27,72 @@ def jenny_check(shift):
         return shift
 
 
-def assignment(slots, workers):
-    """This script assigns workers to shifts"""
+def assignment(names):
+    """Assign workers to slots"""
 
-    workers = [i.capitalize() for i in workers]
-    shuffle(workers)
-    FM = dict(zip(slots, workers))
+    four_slots = ["AJ", "AH, SG", "RO, UA, AHA", "MW, TA, SF"]
+    five_slots = ["AJ", "MW, TA", "RO, UA", "AH, SG", "AHA, SF"]
+
+    if len(names) == 4:
+        slots = four_slots
+
+    else:
+        slots = five_slots
+
+    names = [i.capitalize() for i in names]
+    shuffle(names)
+    FM = dict(zip(slots, names))
 
     FM = jenny_check(FM)
 
-    dequed_workers = deque(workers)
-    dequed_workers.rotate(1)
+    dequed_names = deque(names)
+    dequed_names.rotate(1)
 
-    EM = dict(zip(slots, list(dequed_workers)))
+    EM = dict(zip(slots, list(dequed_names)))
 
     EM = jenny_check(EM)
 
     return FM, EM
 
 
-def worker_names(num_workers):
+def worker_names(num_names):
     """Ask for names of personel"""
 
     names = []
-    for i in range(num_workers):
+    for i in range(num_names):
         print("-" * 14)
         name = input("Skriv ett namn och tryck enter: ")
         names.append(name)
         print("-" * 14)
         print(f"Tillagda namn: {', ' .join(names)}")
 
-    return names
-
-
-def four_workers():
-    """Establish four shifts"""
-    shifts = ["AJ", "AH, SG", "RO, UA, AHA", "MW, TA, SF"]
-    workers = worker_names(4)
-    FM, EM = assignment(shifts, workers)
+    FM, EM = assignment(names)
 
     return FM, EM
 
 
-def five_workers():
-    """Establish five shifts"""
-    shifts = {"AJ", "MW, TA", "RO, UA", "AH, SG", "AHA, SF"}
-    workers = worker_names(5)
-    FM, EM = assignment(shifts, workers)
-    return FM, EM
-
-
-def menu():
+def number_of_names():
     """Ask user for number of personel"""
 
     print("Hur många personal vill du fördela?\n")
 
-    num_workers = input("Ange 4 eller 5: ")
+    num_names = input("Ange 4 eller 5: ")
 
-    if num_workers == "4":
-        FM, EM = four_workers()
-
-    elif num_workers == "5":
-        FM, EM = five_workers()
+    if num_names == "4" or "5":
+        FM, EM = worker_names(int(num_names))
 
     else:
         print("Försök igen")
         sleep(3)
-        menu()
+        main()
+
+    return FM, EM
+
+
+def main():
+    """Run functions when script runs and print the result"""
+
+    FM, EM = number_of_names()
 
     print("-" * 14)
     print("Morgonen:")
@@ -102,26 +101,14 @@ def menu():
     print("Eftermiddagen:")
     print(json.dumps(EM, indent=4))
 
-    to_print = input("Om du vill skriva schemat till en fil, skriv EXPORT: ")
+    to_export = input("Vill du skriva resultatet till en fil? (y/n)")
 
-    if to_print == "EXPORT":
+    if to_export == "y":
         export(FM, EM)
+
     else:
         print("Avslutar...")
         sleep(3)
-
-    return FM, EM
-
-
-def main():
-    """Call menu when script runs"""
-
-    FM, EM = menu()
-
-    print(json.dumps(FM, indent=4))
-    print(json.dumps(EM, indent=4))
-    menu()
-    sleep(200)
 
 
 if __name__ == "__main__":
