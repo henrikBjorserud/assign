@@ -3,11 +3,13 @@ from time import sleep
 from collections import deque
 import json
 
+
 def export(FM, EM):
     """Export results to txt-file"""
     whole_day = {"FM": FM, "EM": EM}
-    with open('dagens.txt', 'w') as out_file:
-        json.dump(whole_day, out_file, indent = 4, ensure_ascii = False)
+    with open("dagens.txt", "w") as out_file:
+        json.dump(whole_day, out_file, indent=4, ensure_ascii=False)
+
 
 def jenny_check(shift):
     """Check value of JK and rotate accordingly"""
@@ -99,12 +101,12 @@ def menu():
     print("-" * 14)
     print("Eftermiddagen:")
     print(json.dumps(EM, indent=4))
-    
+
     to_print = input("Om du vill skriva schemat till en fil, skriv EXPORT: ")
-    
+
     if to_print == "EXPORT":
         export(FM, EM)
-    else: 
+    else:
         print("Avslutar...")
         sleep(3)
 

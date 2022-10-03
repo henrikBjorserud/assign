@@ -1,7 +1,7 @@
-import assign
-from .support import names
-from .support import export
-from .extras import jennycheck
+from assign import Workday
+from support import names, export
+import json
+from time import sleep
 
 
 def main():
@@ -9,7 +9,6 @@ def main():
     three = ["JK", "MB, AB, AG", "KU, GL, FB"]
     four = ["JK", "MB, AB, AG", "KU, SA", "GL, FB"]
 
-    assign = assign.Assign()
 
     print("Hur många personal vill du fördela?\n")
     num_names = input("Ange 3 eller 4: ")
@@ -20,15 +19,16 @@ def main():
     else:
         workers = names(4)
         slots = four
-
-    schedule = assign(workers, slots)
-
+    
+    print(workers, slots)
+    verkstan = Workday("verkstan")
+    verkstan.assign_workers(workers, slots)
     print("-" * 14)
     print("Morgonen:")
-    print(json.dumps(schedule.get("FM"), indent=4))
+    print(verkstan.before_lunch)
     print("-" * 14)
     print("Eftermiddagen:")
-    print(json.dumps(schedule.get("EM"), indent=4))
+    print(verkstan.after_lunch)
 
     to_export = input("Vill du skriva resultatet till en fil? (y/n)")
 

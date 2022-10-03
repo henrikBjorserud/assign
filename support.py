@@ -8,11 +8,11 @@ def names(num_names):
     for i in range(num_names):
         print("-" * 14)
         name = input("Skriv ett namn och tryck enter: ")
-        names.append(name)
+        worker_names.append(name)
         print("-" * 14)
-        print(f"Tillagda namn: {', ' .join(names)}")
+        print(f"Tillagda namn: {', ' .join(worker_names)}")
 
-    worker_names = [i.capitalize() for i in names]
+    worker_names = [i.capitalize() for i in worker_names]
 
     return worker_names
 

@@ -1,8 +1,14 @@
 from collections import deque
 
 
-def jenny_check(shift, person):
+def jenny_check(shift, workplace):
     """Check value of JK or MJ and rotate accordingly"""
+    if workplace == "verkstan":
+        person = "JK"
+    else:
+        person = "MJ"
+
+    print(shift)
 
     if (len(shift)) == 3 or 5:
         que_number = -1

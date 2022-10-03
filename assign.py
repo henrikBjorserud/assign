@@ -3,30 +3,26 @@ from collections import deque
 from extras import jenny_check
 
 
-class Assign:
-    def __init__(self, names, slots):
-        self.names = names
-        self.slots = slots
+class Workday:
+    def __init__(self, workplace):
+        self.workplace = workplace
+        self.before_lunch = {"FM" : []}
+        self.after_lunch = {"EM" : []}
 
-    def assign(self, names, slots):
+    def assign_workers(self, names, slots):
 
         names = [i.capitalize() for i in names]
         shuffle(names)
         FM = dict(zip(slots, names))
 
-        FM = jenny_check(FM)
+        FM = jenny_check(FM, self.workplace)
 
         dequed_names = deque(names)
         dequed_names.rotate(1)
 
         EM = dict(zip(slots, list(dequed_names)))
 
-        EM = jenny_check(EM)
+        EM = jenny_check(EM, self.workplace)
 
-        FM = {"FM": FM}
-
-        EM = {"EM": EM}
-
-        schedule = FM | EM
-
-        return schedule
+        self.before_lunch["FM"].append(FM)
+        self.after_lunch["EM"].append(EM)

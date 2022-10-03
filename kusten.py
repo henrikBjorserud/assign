@@ -74,40 +74,40 @@ def worker_names(num_names):
 def number_of_names():
     """Ask user for number of personel"""
 
-    print("Hur många personal vill du fördela?\n")
+    print("hur många personal vill du fördela?\n")
 
-    num_names = input("Ange 4 eller 5: ")
+    num_names = input("ange 4 eller 5: ")
 
     if num_names == "4" or "5":
-        FM, EM = worker_names(int(num_names))
+        fm, em = worker_names(int(num_names))
 
     else:
-        print("Försök igen")
+        print("försök igen")
         sleep(3)
         main()
 
-    return FM, EM
+    return fm, em
 
 
 def main():
-    """Run functions when script runs and print the result"""
+    """run functions when script runs and print the result"""
 
-    FM, EM = number_of_names()
+    fm, em = number_of_names()
 
     print("-" * 14)
-    print("Morgonen:")
-    print(json.dumps(FM, indent=4))
+    print("morgonen:")
+    print(json.dumps(fm, indent=4))
     print("-" * 14)
-    print("Eftermiddagen:")
-    print(json.dumps(EM, indent=4))
+    print("eftermiddagen:")
+    print(json.dumps(em, indent=4))
 
-    to_export = input("Vill du skriva resultatet till en fil? (y/n)")
+    to_export = input("vill du skriva resultatet till en fil? (y/n)")
 
     if to_export == "y":
-        export(FM, EM)
+        export(fm, em)
 
     else:
-        print("Avslutar...")
+        print("avslutar...")
         sleep(3)
 
 
