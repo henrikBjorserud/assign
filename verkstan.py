@@ -16,24 +16,21 @@ def main():
     if num_names == "3":
         workers = names(3)
         slots = three
-    else:
+    elif num_names == "4":
         workers = names(4)
         slots = four
+    else:
+        main()
     
-    print(workers, slots)
     verkstan = Workday("verkstan")
     verkstan.assign_workers(workers, slots)
-    print("-" * 14)
-    print("Morgonen:")
-    print(verkstan.before_lunch)
-    print("-" * 14)
-    print("Eftermiddagen:")
-    print(verkstan.after_lunch)
+    
+    print(verkstan.__repr__())
 
     to_export = input("Vill du skriva resultatet till en fil? (y/n)")
 
     if to_export == "y":
-        export(schedule)
+        export(verkstan)
 
     else:
         print("Avslutar...")

@@ -20,6 +20,6 @@ def names(num_names):
 def export(schedule):
     """Export results to txt-file"""
     with open("dagens.txt", "w") as out_file:
-        json.dump(schedule, out_file, indent=4, ensure_ascii=False)
+        json.dump(schedule.__dict__, out_file, indent=4, ensure_ascii=False)
 
     return "Schedule Exported"

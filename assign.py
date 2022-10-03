@@ -6,8 +6,13 @@ from extras import jenny_check
 class Workday:
     def __init__(self, workplace):
         self.workplace = workplace
-        self.before_lunch = {"FM" : []}
-        self.after_lunch = {"EM" : []}
+        self.before_lunch = []
+        self.after_lunch = []
+
+    def __repr__(self):
+        new_line = "\n"
+        return f'Workplace: {self.workplace}{new_line}Before lunch: {self.before_lunch[0]}{new_line}After lunch: {self.after_lunch[0]}{new_line}' 
+
 
     def assign_workers(self, names, slots):
 
@@ -24,5 +29,5 @@ class Workday:
 
         EM = jenny_check(EM, self.workplace)
 
-        self.before_lunch["FM"].append(FM)
-        self.after_lunch["EM"].append(EM)
+        self.before_lunch.append(FM)
+        self.after_lunch.append(EM)

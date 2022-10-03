@@ -8,8 +8,6 @@ def jenny_check(shift, workplace):
     else:
         person = "MJ"
 
-    print(shift)
-
     if (len(shift)) == 3 or 5:
         que_number = -1
     else:
