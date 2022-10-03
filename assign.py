@@ -19,14 +19,14 @@ class Workday:
         shuffle(names)
         FM = dict(zip(slots, names))
 
-        FM = jenny_check(FM, self.workplace)
+        FM = jenny_check(FM)
 
         dequed_names = deque(names)
         dequed_names.rotate(1)
 
         EM = dict(zip(slots, list(dequed_names)))
 
-        EM = jenny_check(EM, self.workplace)
+        EM = jenny_check(EM)
 
         self.before_lunch.append(FM)
         self.after_lunch.append(EM)
