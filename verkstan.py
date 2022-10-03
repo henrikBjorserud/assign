@@ -1,6 +1,5 @@
 from assign import Workday
 from support import names, export
-import json
 from time import sleep
 
 
@@ -8,7 +7,6 @@ def main():
 
     three = ["JK", "MB, AB, AG", "KU, GL, FB"]
     four = ["JK", "MB, AB, AG", "KU, SA", "GL, FB"]
-
 
     print("Hur många personal vill du fördela?\n")
     num_names = input("Ange 3 eller 4: ")
@@ -21,10 +19,10 @@ def main():
         slots = four
     else:
         main()
-    
+
     verkstan = Workday("verkstan")
     verkstan.assign_workers(workers, slots)
-    
+
     print(verkstan.__repr__())
 
     to_export = input("Vill du skriva resultatet till en fil? (y/n)")

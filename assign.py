@@ -11,8 +11,7 @@ class Workday:
 
     def __repr__(self):
         new_line = "\n"
-        return f'Workplace: {self.workplace}{new_line}Before lunch: {self.before_lunch[0]}{new_line}After lunch: {self.after_lunch[0]}{new_line}' 
-
+        return f"Workplace: {self.workplace}{new_line}Before lunch: {self.before_lunch[0]}{new_line}After lunch: {self.after_lunch[0]}{new_line}"
 
     def assign_workers(self, names, slots):
 
