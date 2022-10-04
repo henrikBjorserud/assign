@@ -4,6 +4,7 @@ from time import sleep
 
 
 def main():
+    """The main function for crating a schedule for Kusten"""
 
     four = ["AJ", "AH, SG", "RO, UA, AHA", "MW, TA, SF"]
     five = ["AJ", "MW, TA", "RO, UA", "AH, SG", "AHA, SF"]

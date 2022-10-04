@@ -4,7 +4,7 @@ from time import sleep
 
 
 def main():
-
+    """The main function for making a schedule for Verkstan"""
     three = ["JK", "MB, AB, AG", "KU, GL, FB"]
     four = ["JK", "MB, AB, AG", "KU, SA", "GL, FB"]
 
