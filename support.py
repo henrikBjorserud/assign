@@ -42,11 +42,11 @@ def jenny_check(shift):
 
     if (
         "JK" in shift
-        and shift.get("JK") == "Jenny"
+        and shift.get("JK") == "Anna"
         or "MW, TA, SF" in shift
-        and shift.get("MW, TA, SF") == "Jenny"
+        and shift.get("MW, TA, SF") == "Anna"
         or "MW, TA" in shift
-        and shift.get("MW, TA") == "Jenny"
+        and shift.get("MW, TA") == "Anna"
     ):
         return True
     else:

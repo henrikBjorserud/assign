@@ -5,8 +5,8 @@ from time import sleep
 
 def main():
     """The main function for making a schedule for Verkstan"""
-    three = ["JK", "MB, AB, AG", "KU, GL, FB"]
-    four = ["JK", "MB, AB, AG", "KU, SA", "GL, FB"]
+    three = ["JK", "MB, AG", "KU, GL, FB"]
+    four = ["JK", "MB, AG", "KU", "GL, FB"]
 
     print("Hur många personal vill du fördela?\n")
     num_names = input("Ange 3 eller 4: ")
